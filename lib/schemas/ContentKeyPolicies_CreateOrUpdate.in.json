@@ -1,0 +1,152 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "accountName": {
+            "required": true,
+            "type": "string"
+        },
+        "contentKeyPolicyName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "The core properties of ARM resources.",
+                            "properties": {
+                                "id": {
+                                    "description": "Fully qualified resource ID for the resource.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "The name of the resource.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "The type of the resource.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "The resource model definition for a ARM proxy resource."
+                }
+            ],
+            "description": "A Content Key Policy resource.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of the Content Key Policy.",
+                    "properties": {
+                        "created": {
+                            "description": "The creation date of the Policy",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string",
+                            "nullable": false
+                        },
+                        "description": {
+                            "description": "A description for the Policy.",
+                            "type": "string"
+                        },
+                        "lastModified": {
+                            "description": "The last modified date of the Policy",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string",
+                            "nullable": false
+                        },
+                        "options": {
+                            "description": "The Key Policy options.",
+                            "items": {
+                                "description": "Represents a policy option.",
+                                "properties": {
+                                    "configuration": {
+                                        "description": "The key delivery configuration.",
+                                        "discriminator": {
+                                            "propertyName": "@odata.type"
+                                        },
+                                        "properties": {
+                                            "@odata.type": {
+                                                "description": "The discriminator for derived types.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "@odata.type"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "name": {
+                                        "description": "The Policy Option description.",
+                                        "type": "string"
+                                    },
+                                    "policyOptionId": {
+                                        "description": "The legacy Policy Option ID.",
+                                        "format": "uuid",
+                                        "readOnly": true,
+                                        "type": "string",
+                                        "nullable": false
+                                    },
+                                    "restriction": {
+                                        "description": "The requirements that must be met to deliver keys with this configuration",
+                                        "discriminator": {
+                                            "propertyName": "@odata.type"
+                                        },
+                                        "properties": {
+                                            "@odata.type": {
+                                                "description": "The discriminator for derived types.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "@odata.type"
+                                        ],
+                                        "type": "object"
+                                    }
+                                },
+                                "required": [
+                                    "configuration",
+                                    "restriction"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "policyId": {
+                            "description": "The legacy Policy ID.",
+                            "format": "uuid",
+                            "readOnly": true,
+                            "type": "string",
+                            "nullable": false
+                        }
+                    },
+                    "required": [
+                        "options"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
